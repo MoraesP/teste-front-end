@@ -1,1 +1,10 @@
-<div>Inicio</div>
+<div class="body">
+  <div class="conteudo">
+    <span class="titulo">Cardapio</span>
+    <div class="cards">
+      <ng-container *ngFor="let produto of todosProdutos">
+        <span>{{ produto.title }}</span>
+      </ng-container>
+    </div>
+  </div>
+</div>
