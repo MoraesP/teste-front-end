@@ -1,4 +1,11 @@
 <div class="header">
-    <div class="title">Cardápio Digital</div>
-    <input type="text" class="form-control input-text" placeholder="Comida...">
+  <div class="title">Cardápio Digital</div>
+  <input
+    type="text"
+    class="form-control input-text"
+    placeholder="Comida..."
+    [(ngModel)]="comida"
+    #inputText="ngModel"
+    (ngModelChange)="buscar()"
+  />
 </div>

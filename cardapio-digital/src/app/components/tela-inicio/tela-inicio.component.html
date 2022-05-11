@@ -1,7 +1,9 @@
 <div class="body">
   <div class="conteudo">
     <div class="cards">
-      <ng-container *ngFor="let produto of todosProdutos">
+      <ng-container
+        *ngFor="let produto of todosProdutos | filterBy: filterProduto"
+      >
         <app-card-info [produto]="produto"></app-card-info>
       </ng-container>
     </div>

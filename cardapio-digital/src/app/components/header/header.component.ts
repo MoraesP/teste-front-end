@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { UpdateCardapioService } from 'src/app/services/update-cardapio.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  comida = '';
 
-  constructor() { }
+  constructor(private updateCardapioService: UpdateCardapioService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  buscar() {
+    this.updateCardapioService.filtro$.next(this.comida);
   }
-
 }
