@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Cardapio } from 'src/app/models/cardapio';
 import { Categoria } from 'src/app/models/categoria';
 import { Produto } from 'src/app/models/produto';
@@ -20,7 +21,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private cardapioService: CardapioService,
-    private updateCardapioService: UpdateCardapioService
+    private updateCardapioService: UpdateCardapioService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +37,6 @@ export class HeaderComponent implements OnInit {
       this.updateCardapioService.produtos$.next(this.todosProdutos);
       this.updateCardapioService.categorias$.next(this.todasCategorias);
     });
-
   }
 
   buscar() {
@@ -44,5 +45,9 @@ export class HeaderComponent implements OnInit {
 
   selecionarCategoria(valor: string) {
     this.updateCardapioService.filtroCategoria$.next(valor);
+  }
+
+  navegar(rota) {
+    this.router.navigateByUrl(rota);
   }
 }

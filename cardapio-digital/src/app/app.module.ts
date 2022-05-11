@@ -1,16 +1,17 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { BrowserModule } from '@angular/platform-browser';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TelaInicioComponent } from './components/tela-inicio/tela-inicio.component';
-import { HeaderComponent } from './components/header/header.component';
-import { CardapioService } from './services/ cardapio.service';
-import { HttpClientModule } from '@angular/common/http';
 import { CardInfoComponent } from './components/card-info/card-info.component';
-import { FilterPipeModule } from 'ngx-filter-pipe';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './components/header/header.component';
+import { NovoProdutoComponent } from './components/novo-produto/novo-produto.component';
+import { TelaInicioComponent } from './components/tela-inicio/tela-inicio.component';
+import { CardapioService } from './services/ cardapio.service';
 import { UpdateCardapioService } from './services/update-cardapio.service';
 
 @NgModule({
@@ -19,6 +20,7 @@ import { UpdateCardapioService } from './services/update-cardapio.service';
     TelaInicioComponent,
     HeaderComponent,
     CardInfoComponent,
+    NovoProdutoComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,9 +28,10 @@ import { UpdateCardapioService } from './services/update-cardapio.service';
     HttpClientModule,
     FilterPipeModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    MatIconModule,
   ],
   providers: [CardapioService, UpdateCardapioService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

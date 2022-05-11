@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NovoProdutoComponent } from './components/novo-produto/novo-produto.component';
 import { TelaInicioComponent } from './components/tela-inicio/tela-inicio.component';
 
 const routes: Routes = [
@@ -10,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'novo',
-    component: TelaInicioComponent,
+    component: NovoProdutoComponent,
     data: { title: 'Novo produto' },
   },
 ];
