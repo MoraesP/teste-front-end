@@ -1,9 +1,8 @@
 <div class="body">
   <div class="conteudo">
-    <span class="titulo">Cardapio</span>
     <div class="cards">
       <ng-container *ngFor="let produto of todosProdutos">
-        <span>{{ produto.title }}</span>
+        <app-card-info [produto]="produto"></app-card-info>
       </ng-container>
     </div>
   </div>

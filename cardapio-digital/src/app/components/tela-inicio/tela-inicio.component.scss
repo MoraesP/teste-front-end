@@ -8,25 +8,16 @@
 
   .conteudo {
     height: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
     border-radius: 5px;
     border: 2px solid $marrom-escuro;
-
-    .titulo {
-      margin-top: -16px;
-      margin-left: 30px;
-      height: fit-content;
-      padding: 0 15px;
-      font-size: 20px;
-      color: $marrom-escuro;
-      background-color: white;
-      position: absolute;
-    }
 
     .cards {
       display: grid;
       gap: 15px;
       margin: 30px;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
     }
   }
 }

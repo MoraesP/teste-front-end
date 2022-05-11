@@ -1,0 +1,16 @@
+<div class="card">
+  <span class="titulo">{{ produto.title }}</span>
+  <div class="d-flex">
+    <img
+      src="{{ produto.picture }}"
+      class="imagem"
+      alt="produto-{{ produto.id }}"
+    />
+    <div class="info">
+      <div>Descrição:</div>
+      <div class="texto-italico">{{ produto.description }}</div>
+      <div>Preço:</div>
+      <div class="texto-negrito">R$ {{ produto.price }}</div>
+    </div>
+  </div>
+</div>

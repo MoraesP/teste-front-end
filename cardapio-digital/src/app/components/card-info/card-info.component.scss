@@ -1,0 +1,36 @@
+@import "./../../../styles.scss";
+
+.card {
+  height: 100%;
+  border: 1px solid $marrom-claro;
+
+  .titulo {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 18px;
+  }
+
+  .imagem {
+    height: 200px;
+    margin: 15px;
+    border-radius: 15px;
+  }
+
+  .info {
+    margin: 15px;
+    .texto-italico {
+      font-style: italic;
+      margin-bottom: 30px;
+    }
+
+    .texto-negrito {
+      font-weight: bold;
+    }
+  }
+
+  &:hover {
+      cursor: pointer;
+      border-color: $marrom-escuro;
+      background-color: $bege-claro;
+  }
+}
