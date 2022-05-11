@@ -8,6 +8,11 @@ const routes: Routes = [
     component: TelaInicioComponent,
     data: { title: 'Página inicial' },
   },
+  {
+    path: 'novo',
+    component: TelaInicioComponent,
+    data: { title: 'Novo produto' },
+  },
 ];
 
 @NgModule({

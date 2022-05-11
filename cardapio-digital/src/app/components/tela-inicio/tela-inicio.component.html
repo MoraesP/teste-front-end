@@ -2,9 +2,13 @@
   <div class="conteudo">
     <div class="cards">
       <ng-container
-        *ngFor="let produto of todosProdutos | filterBy: filterProduto"
+        *ngFor="let categoria of todasCategorias | filterBy: filterCategoria"
       >
-        <app-card-info [produto]="produto"></app-card-info>
+        <ng-container
+          *ngFor="let produto of categoria.products | filterBy: filterProduto"
+        >
+          <app-card-info [produto]="produto"></app-card-info>
+        </ng-container>
       </ng-container>
     </div>
   </div>

@@ -8,4 +8,20 @@
     #inputText="ngModel"
     (ngModelChange)="buscar()"
   />
+  <div class="form-group select">
+    <select
+      class="form-control"
+      id="select-categoria"
+      (change)="selecionarCategoria($event.target.value)"
+    >
+      <option value="">Todas</option>
+      >
+      <option
+        *ngFor="let categoria of todasCategorias"
+        (click)="selecionarCategoria(categoria.category_title)"
+      >
+        {{ categoria.category_title }}
+      </option>
+    </select>
+  </div>
 </div>

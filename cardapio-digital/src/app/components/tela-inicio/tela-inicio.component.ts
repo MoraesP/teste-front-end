@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Cardapio } from 'src/app/models/cardapio';
+import { Categoria } from 'src/app/models/categoria';
 import { Produto } from 'src/app/models/produto';
 import { CardapioService } from 'src/app/services/ cardapio.service';
 import { UpdateCardapioService } from 'src/app/services/update-cardapio.service';
@@ -11,12 +12,13 @@ import { UpdateCardapioService } from 'src/app/services/update-cardapio.service'
   styleUrls: ['./tela-inicio.component.scss'],
 })
 export class TelaInicioComponent implements OnInit, OnDestroy {
-  cardapio: Cardapio = new Cardapio();
   todosProdutos: Produto[] = [];
+  todasCategorias: Categoria[] = [];
 
   filterProduto = { title: '' };
+  filterCategoria = { category_title: '' };
 
-  filtroSubscription: Subscription;
+  subscriptions: Subscription[] = [];
 
   constructor(
     private cardapioService: CardapioService,
@@ -24,25 +26,53 @@ export class TelaInicioComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.cardapioService.getCardapio().subscribe((res) => {
-      this.cardapio.categorias = res;
-      this.cardapio.categorias.forEach((categoria) => {
-        this.todosProdutos.push(...categoria.products);
-      });
-    });
-
-    this.subscribeFiltro();
+    this.subscribeProdutos();
+    this.subscribeCategorias();
+    this.subscribeFiltroProduto();
+    this.subscribeFiltroCategoria();
   }
 
-  subscribeFiltro() {
-    this.filtroSubscription = this.updateCardapioService.filtro$.subscribe(
+  subscribeFiltroProduto() {
+    const subscription = this.updateCardapioService.filtroProduto$.subscribe(
       (filtro) => {
         this.filterProduto.title = filtro;
       }
     );
+    this.subscriptions.push(subscription);
+  }
+
+  subscribeFiltroCategoria() {
+    const subscription = this.updateCardapioService.filtroCategoria$.subscribe(
+      (categoria) => {
+        this.filterCategoria.category_title = categoria;
+      }
+    );
+    this.subscriptions.push(subscription);
+  }
+
+  subscribeProdutos() {
+    const subscription = this.updateCardapioService.produtos$.subscribe(
+      (produtos) => {
+        this.todosProdutos = produtos;
+      }
+    );
+    this.subscriptions.push(subscription);
+  }
+
+  subscribeCategorias() {
+    const subscription = this.updateCardapioService.categorias$.subscribe(
+      (categorias) => {
+        this.todasCategorias = categorias;
+      }
+    );
+    this.subscriptions.push(subscription);
   }
 
   ngOnDestroy(): void {
-    this.filtroSubscription.unsubscribe();
+    if (this.subscriptions.length > 0) {
+      this.subscriptions.forEach((subs) => {
+        subs.unsubscribe();
+      });
+    }
   }
 }

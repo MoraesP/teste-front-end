@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Cardapio } from 'src/app/models/cardapio';
+import { Categoria } from 'src/app/models/categoria';
+import { Produto } from 'src/app/models/produto';
+import { CardapioService } from 'src/app/services/ cardapio.service';
 import { UpdateCardapioService } from 'src/app/services/update-cardapio.service';
 
 @Component({
@@ -9,11 +13,36 @@ import { UpdateCardapioService } from 'src/app/services/update-cardapio.service'
 export class HeaderComponent implements OnInit {
   comida = '';
 
-  constructor(private updateCardapioService: UpdateCardapioService) {}
+  cardapio: Cardapio = new Cardapio();
 
-  ngOnInit(): void {}
+  todosProdutos: Produto[] = [];
+  todasCategorias: Categoria[] = [];
+
+  constructor(
+    private cardapioService: CardapioService,
+    private updateCardapioService: UpdateCardapioService
+  ) {}
+
+  ngOnInit(): void {
+    this.cardapioService.getCardapio().subscribe((res) => {
+      this.cardapio.categorias = res;
+
+      this.cardapio.categorias.forEach((categoria) => {
+        this.todosProdutos.push(...categoria.products);
+      });
+      this.todasCategorias = this.cardapio.categorias;
+
+      this.updateCardapioService.produtos$.next(this.todosProdutos);
+      this.updateCardapioService.categorias$.next(this.todasCategorias);
+    });
+
+  }
 
   buscar() {
-    this.updateCardapioService.filtro$.next(this.comida);
+    this.updateCardapioService.filtroProduto$.next(this.comida);
+  }
+
+  selecionarCategoria(valor: string) {
+    this.updateCardapioService.filtroCategoria$.next(valor);
   }
 }
