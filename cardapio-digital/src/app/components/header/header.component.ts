@@ -49,5 +49,7 @@ export class HeaderComponent implements OnInit {
 
   navegar(rota) {
     this.router.navigateByUrl(rota);
+    this.updateCardapioService.produtos$.next(this.todosProdutos);
+    this.updateCardapioService.categorias$.next(this.todasCategorias);
   }
 }

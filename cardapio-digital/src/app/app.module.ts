@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { FilterPipeModule } from 'ngx-filter-pipe';
@@ -30,6 +30,8 @@ import { UpdateCardapioService } from './services/update-cardapio.service';
     CommonModule,
     FormsModule,
     MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [CardapioService, UpdateCardapioService],
   bootstrap: [AppComponent],
