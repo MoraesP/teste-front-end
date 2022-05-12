@@ -12,7 +12,6 @@ import { UpdateCardapioService } from 'src/app/services/update-cardapio.service'
   styleUrls: ['./tela-inicio.component.scss'],
 })
 export class TelaInicioComponent implements OnInit, OnDestroy {
-  todosProdutos: Produto[] = [];
   todasCategorias: Categoria[] = [];
 
   filterProduto = { title: '' };
@@ -26,7 +25,6 @@ export class TelaInicioComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subscribeProdutos();
     this.subscribeCategorias();
     this.subscribeFiltroProduto();
     this.subscribeFiltroCategoria();
@@ -45,15 +43,6 @@ export class TelaInicioComponent implements OnInit, OnDestroy {
     const subscription = this.updateCardapioService.filtroCategoria$.subscribe(
       (categoria) => {
         this.filterCategoria.category_title = categoria;
-      }
-    );
-    this.subscriptions.push(subscription);
-  }
-
-  subscribeProdutos() {
-    const subscription = this.updateCardapioService.produtos$.subscribe(
-      (produtos) => {
-        this.todosProdutos = produtos;
       }
     );
     this.subscriptions.push(subscription);

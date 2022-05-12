@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Cardapio } from 'src/app/models/cardapio';
 import { Categoria } from 'src/app/models/categoria';
 import { Produto } from 'src/app/models/produto';
@@ -19,10 +19,12 @@ export class HeaderComponent implements OnInit {
   todosProdutos: Produto[] = [];
   todasCategorias: Categoria[] = [];
 
+  modalRef: BsModalRef;
+
   constructor(
     private cardapioService: CardapioService,
     private updateCardapioService: UpdateCardapioService,
-    private router: Router
+    private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
@@ -34,7 +36,6 @@ export class HeaderComponent implements OnInit {
       });
       this.todasCategorias = this.cardapio.categorias;
 
-      this.updateCardapioService.produtos$.next(this.todosProdutos);
       this.updateCardapioService.categorias$.next(this.todasCategorias);
     });
   }
@@ -47,9 +48,23 @@ export class HeaderComponent implements OnInit {
     this.updateCardapioService.filtroCategoria$.next(valor);
   }
 
-  navegar(rota) {
-    this.router.navigateByUrl(rota);
-    this.updateCardapioService.produtos$.next(this.todosProdutos);
+  openModal(template: TemplateRef<any>) {
+    const config = {
+      ignoreBackdropClick: true,
+    };
+    this.modalRef = this.modalService.show(template, config);
+  }
+
+  closeModal() {
+    this.modalRef.hide();
+  }
+
+  salvar(result) {
+    result.produto.id = this.todosProdutos.length;
+    this.todasCategorias
+      .find((categoria) => categoria.category_title === result.categoria)
+      .products.push(result.produto);
     this.updateCardapioService.categorias$.next(this.todasCategorias);
+    this.modalRef.hide();
   }
 }

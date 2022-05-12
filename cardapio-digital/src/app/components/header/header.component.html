@@ -1,6 +1,6 @@
 <div class="header">
-  <div class="title" (click)="navegar('')">Cardápio Digital</div>
-  <div class="new" (click)="navegar('novo')">novo</div>
+  <div class="title">Cardápio Digital</div>
+  <div class="new" (click)="openModal(novoProduto)">novo</div>
   <input
     type="text"
     class="form-control input-text"
@@ -17,12 +17,17 @@
     >
       <option value="">Todas</option>
       >
-      <option
-        *ngFor="let categoria of todasCategorias"
-        (click)="selecionarCategoria(categoria.category_title)"
-      >
+      <option *ngFor="let categoria of todasCategorias">
         {{ categoria.category_title }}
       </option>
     </select>
   </div>
 </div>
+
+<ng-template #novoProduto>
+  <app-novo-produto
+    [categorias]="todasCategorias"
+    (saveEmit)="salvar($event)"
+    (cancelEmit)="closeModal()"
+  ></app-novo-produto>
+</ng-template>

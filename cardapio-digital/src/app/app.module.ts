@@ -13,6 +13,7 @@ import { NovoProdutoComponent } from './components/novo-produto/novo-produto.com
 import { TelaInicioComponent } from './components/tela-inicio/tela-inicio.component';
 import { CardapioService } from './services/ cardapio.service';
 import { UpdateCardapioService } from './services/update-cardapio.service';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,8 @@ import { UpdateCardapioService } from './services/update-cardapio.service';
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
+    ModalModule.forRoot(),
+
   ],
   providers: [CardapioService, UpdateCardapioService],
   bootstrap: [AppComponent],

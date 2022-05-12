@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Categoria } from 'src/app/models/categoria';
 import { Produto } from 'src/app/models/produto';
 
 @Component({
@@ -9,11 +10,17 @@ import { Produto } from 'src/app/models/produto';
 })
 export class NovoProdutoComponent implements OnInit {
   novoProdutoForm: FormGroup;
+  categoriaSelecionada = '';
+
+  @Input() categorias: Categoria[] = [];
+  @Output() saveEmit = new EventEmitter<any>();
+  @Output() cancelEmit = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.buildForm();
+    this.categoriaSelecionada = this.categorias[0].category_title;
   }
 
   buildForm() {
@@ -27,8 +34,22 @@ export class NovoProdutoComponent implements OnInit {
     });
   }
 
+  selecionarCategoria(valor: string) {
+    this.categoriaSelecionada = valor;
+  }
+
   submit() {
     const rawValue = this.novoProdutoForm.getRawValue() as Produto;
-    console.group(rawValue);
+
+    const produtoCategoria = {
+      produto: rawValue,
+      categoria: this.categoriaSelecionada,
+    };
+
+    this.saveEmit.emit(produtoCategoria);
+  }
+
+  cancelar() {
+    this.cancelEmit.emit();
   }
 }

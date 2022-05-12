@@ -1,6 +1,7 @@
 .body {
-  top: 100px;
-  padding: 45px;
-  position: relative;
-  height: calc(100vh - 100px);
+  padding: 30px;
+
+  .buttons {
+    justify-content: space-between;
+  }
 }

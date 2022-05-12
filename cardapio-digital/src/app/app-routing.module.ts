@@ -9,11 +9,6 @@ const routes: Routes = [
     component: TelaInicioComponent,
     data: { title: 'Página inicial' },
   },
-  {
-    path: 'novo',
-    component: NovoProdutoComponent,
-    data: { title: 'Novo produto' },
-  },
 ];
 
 @NgModule({

@@ -41,14 +41,30 @@
     </div>
   </form>
 
-  <div class="d-flex justify-content-center">
+  <div class="form-group select">
+    <select
+      class="form-control"
+      id="select-categoria"
+      (change)="selecionarCategoria($event.target.value)"
+    >
+      >
+      <option *ngFor="let categoria of categorias">
+        {{ categoria.category_title }}
+      </option>
+    </select>
+  </div>
+
+  <div class="d-flex buttons">
     <button
-      type="submit"
+      type="button"
       class="btn btn-success"
       [disabled]="!novoProdutoForm.valid"
       (click)="submit()"
     >
       Adicionar produto
+    </button>
+    <button type="button" class="btn btn-danger" (click)="cancelar()">
+      Cancelar
     </button>
   </div>
 </div>
