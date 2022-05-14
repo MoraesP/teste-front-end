@@ -14,6 +14,7 @@ import { TelaInicioComponent } from './components/tela-inicio/tela-inicio.compon
 import { CardapioService } from './services/ cardapio.service';
 import { UpdateCardapioService } from './services/update-cardapio.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { RatingModule } from 'ngx-bootstrap/rating';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     FormsModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
+    RatingModule.forRoot(),
 
   ],
   providers: [CardapioService, UpdateCardapioService],

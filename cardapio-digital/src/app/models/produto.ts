@@ -5,4 +5,6 @@ export class Produto {
   price: number;
   picture: string;
   thumbnail: string;
+
+  rating?: number;
 }

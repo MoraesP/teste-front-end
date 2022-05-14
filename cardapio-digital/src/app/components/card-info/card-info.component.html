@@ -1,5 +1,8 @@
 <div class="card">
-  <span class="titulo">{{ produto.title }}</span>
+  <div class="header">
+    <span class="titulo">{{ produto.title }}</span>
+    <mat-icon (click)="deleteProduto()">delete</mat-icon>
+  </div>
   <div class="d-flex">
     <img
       src="{{ produto.picture }}"
@@ -7,10 +10,20 @@
       alt="produto-{{ produto.id }}"
     />
     <div class="info">
-      <div>Descrição:</div>
-      <div class="texto-italico">{{ produto.description }}</div>
-      <div>Preço:</div>
-      <div class="texto-negrito">R$ {{ produto.price }}</div>
+      <div>
+        <div>Descrição:</div>
+        <div class="texto-italico">{{ produto.description }}</div>
+      </div>
+      <div>
+        <div>Preço:</div>
+        <div class="texto-negrito">R$ {{ produto.price }}</div>
+      </div>
+      <rating
+        class="nota"
+        [max]="5"
+        iconClass="fa-star"
+        [(ngModel)]="produto.rating"
+      ></rating>
     </div>
   </div>
 </div>

@@ -1,5 +1,6 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Subscription } from 'rxjs';
 import { Cardapio } from 'src/app/models/cardapio';
 import { Categoria } from 'src/app/models/categoria';
 import { Produto } from 'src/app/models/produto';
@@ -11,7 +12,7 @@ import { UpdateCardapioService } from 'src/app/services/update-cardapio.service'
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   comida = '';
 
   cardapio: Cardapio = new Cardapio();
@@ -20,6 +21,8 @@ export class HeaderComponent implements OnInit {
   todasCategorias: Categoria[] = [];
 
   modalRef: BsModalRef;
+
+  subDelete: Subscription;
 
   constructor(
     private cardapioService: CardapioService,
@@ -38,6 +41,28 @@ export class HeaderComponent implements OnInit {
 
       this.updateCardapioService.categorias$.next(this.todasCategorias);
     });
+    this.subscribeDelete();
+  }
+
+  ngOnDestroy(): void {
+    if (this.subDelete) {
+      this.subDelete.unsubscribe();
+    }
+  }
+
+  subscribeDelete() {
+    this.subDelete = this.updateCardapioService.deleteProduto$.subscribe(
+      (id) => {
+        this.todasCategorias.forEach((categoria) => {
+          const idx = categoria.products.findIndex(
+            (produto) => produto.id === id
+          );
+          if (idx > -1) {
+            categoria.products.splice(idx, 1);
+          }
+        });
+      }
+    );
   }
 
   buscar() {

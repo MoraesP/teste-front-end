@@ -10,4 +10,6 @@ export class UpdateCardapioService {
   filtroProduto$ = new Subject<string>();
 
   filtroCategoria$ = new Subject<string>();
+
+  deleteProduto$ = new Subject<number>();
 }

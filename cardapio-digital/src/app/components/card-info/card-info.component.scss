@@ -4,10 +4,21 @@
   height: 100%;
   border: 1px solid $marrom-claro;
 
-  .titulo {
-    text-align: center;
+  .header {
+    display: flex;
     margin-top: 10px;
-    font-size: 18px;
+    padding: 0 15px;
+    .titulo {
+      font-size: 18px;
+      text-align: center;
+    }
+    mat-icon {
+      margin-left: auto;
+      &:hover {
+        color: red;
+        cursor: pointer;
+      }
+    }
   }
 
   .imagem {
@@ -18,19 +29,23 @@
 
   .info {
     margin: 15px;
+    display: grid;
+    
     .texto-italico {
       font-style: italic;
-      margin-bottom: 30px;
     }
 
     .texto-negrito {
       font-weight: bold;
     }
+
+    .nota {
+      font-size: 20px;
+    }
   }
 
   &:hover {
-      cursor: pointer;
-      border-color: $marrom-escuro;
-      background-color: $bege-claro;
+    border-color: $marrom-escuro;
+    background-color: $bege-claro;
   }
 }
